@@ -3,53 +3,66 @@
 
 - **Tipo: `BUG`**
 - **Contexto funcional:** No fechamento de venda do PDV, há múltiplos lançamentos por forma de pagamento e totalizadores dinâmicos (total pago, saldo, troco). A demanda é garantir teto acumulado por forma, com configuração por percentual do total da venda ou valor fixo.
-- Objetivo da análise: Definir validação orientada a risco para assegurar bloqueio consistente ao exceder limite acumulado por forma, com cobertura de UI e backend, preservando totalizadores e evitando bypass operacional/financeiro.
+
+- **Objetivo da análise:** Definir validação orientada a risco para assegurar bloqueio consistente ao exceder limite acumulado por forma, com cobertura de UI e backend, preservando totalizadores e evitando bypass operacional/financeiro.
 
 ### 2) Escopo e fora de escopo
 
-- Escopo: Validação do limite acumulado por forma no fluxo de pagamento PDV; cálculo por percentual ou valor fixo; bloqueio de novos lançamentos ao exceder teto; validação de configuração da forma/condição; validação de rejeição também em backend (critério obrigatório); regressão de total pago/saldo/troco, TEF, crediário, vale/troca e valor mínimo por parcela.
-- Fora de escopo: Alterações de arquitetura; mudança de motor promocional; redesign de UX; regras fiscais de emissão além do impacto indireto de valores de pagamento.
+- **Escopo:** Validação do limite acumulado por forma no fluxo de pagamento PDV; cálculo por percentual ou valor fixo; bloqueio de novos lançamentos ao exceder teto; validação de configuração da forma/condição; validação de rejeição também em backend (critério obrigatório); regressão de total pago/saldo/troco, TEF, crediário, vale/troca e valor mínimo por parcela.
+
+- **Fora de escopo:** Alterações de arquitetura; mudança de motor promocional; redesign de UX; regras fiscais de emissão além do impacto indireto de valores de pagamento.
 
 ### 3) Premissas e dúvidas
 
-- Premissas adotadas: Acúmulo deve ser `somente por forma` (não segmentado por condição); bloqueio deve existir em `UI e backend`; cálculo percentual usa total da venda corrente; o campo de configuração aceita apenas um formato por vez (valor absoluto ou percentual).
-- Lacunas de contexto: Base exata de cálculo quando há desconto/acréscimo/devolução; política de arredondamento oficial para limite e acumulado; comportamento esperado quando total da venda muda após pagamentos já lançados; código de erro/contrato padrão para rejeição no backend.
-- Perguntas mínimas de clarificação (priorizadas):
-1. (Respondida) Escopo do acúmulo: somente por forma ou por forma+condição? Resultado adotado: somente por forma.
-2. (Respondida) Camada obrigatória de bloqueio: UI, backend ou ambas? Resultado adotado: UI e backend.
-3. (Pendente) A base percentual considera total bruto, líquido de desconto/acréscimo ou saldo remanescente?
-4. (Pendente) Ao reduzir total da venda após pagamentos lançados, deve bloquear finalização até ajuste manual dos pagamentos excedentes?
-5. (Pendente) Qual regra oficial de arredondamento para comparação de limite (2 casas, bankers rounding, tolerância de centavos)?
+- **Premissas adotadas:** Acúmulo deve ser `somente por forma` (não segmentado por condição); bloqueio deve existir em `UI e backend`; cálculo percentual usa total da venda corrente; o campo de configuração aceita apenas um formato por vez (valor absoluto ou percentual).
+
+- **Lacunas de contexto:** Base exata de cálculo quando há desconto/acréscimo/devolução; política de arredondamento oficial para limite e acumulado; comportamento esperado quando total da venda muda após pagamentos já lançados; código de erro/contrato padrão para rejeição no backend.
+
 
 ### 4) Comportamento atual vs esperado
 
 - Atual: Pelo relato, não há bloqueio acumulado por forma. Na baseline inspecionada, já existe validação por `valor_limite_venda` no frontend PDV e exibição de “máximo permitido”, com bloqueio por mensagem; não há evidência de validação equivalente no backend de fechamento/persistência.
+
 - Esperado: Limite acumulado por forma, configurável em percentual ou valor fixo, com bloqueio de novos lançamentos ao exceder teto, independentemente da quantidade de lançamentos, e com rejeição também no backend para impedir bypass.
+
 - Diferença crítica: Risco de divergência entre ambiente relatado e baseline técnica; risco residual alto se bloqueio permanecer apenas no frontend.
 
 ### 5) Cenários de simulação
 
 - Fluxo feliz: Venda R$ 100, forma Cartão com 20% => aceitar lançamentos até R$ 20 acumulados e bloquear excedente; Venda R$ 100 com limite fixo R$ 20 => aceitar até R$ 20 e bloquear excedente; múltiplos lançamentos fracionados na mesma forma devem respeitar teto acumulado.
+
 - Cenários de borda: Limite exatamente igual ao acumulado (deve aceitar e depois bloquear novo lançamento); limite zero/nulo (sem bloqueio ou bloqueio total conforme regra oficial); mudança de total da venda após lançamentos (desconto/cancelamento item) com reavaliação do teto; centavos (R$ 19,99 + R$ 0,01).
+
 - Cenários de erro: Configuração inválida (texto malformado); tentativa de lançar acima do limite com valor manual; tentativa de bypass via chamada direta ao backend com payload acima do teto; indisponibilidade parcial de serviço no momento da validação backend.
+
 - Cenários de regressão: Troco/saldo/total pago; regras de valor mínimo de parcela; TEF/vale/troca/crediário; remoção de pagamento e liberação de limite; fechamento de venda e persistência financeira.
 
 ### 6) Possíveis falhas por camada
 
 - UI: Exibir limite incorreto; não somar lançamentos anteriores da mesma forma; bloquear tarde (após inserir); mensagem ambígua; divergência entre formas com e sem condição.
+
 - API: Endpoint de fechamento aceitar payload acima do limite; retorno sem código de erro consistente; ausência de rastreabilidade da rejeição.
+
 - Banco/persistência: Salvar pagamentos excedentes por ausência de validação transacional; inconsistência entre total pago e distribuição por forma.
+
 - Integrações: Fluxo TEF concluir transação externa e depois falhar por limite local sem tratamento operacional; sincronismo entre PDV local e servidor aceitar estados divergentes.
+
 - Permissões: Perfis com permissão de override sem trilha de auditoria; operador comum contornar bloqueio.
+
 - Dados: Configuração ambígua/inválida; arredondamento divergente entre telas; dados legados sem normalização.
 
 ### 7) Plano de testes
 
 - Unitário: Cálculo de limite percentual/fixo; parser de configuração; comparação com acumulado; regra de arredondamento; agregação por forma independentemente de condição.
+
 - Integração: Cadastro/alteração de configuração de forma e condição; leitura da configuração no PDV; rejeição no backend ao exceder limite; persistência íntegra quando dentro do limite.
+
 - E2E: Fluxo completo de venda com múltiplos pagamentos na mesma forma; tentativa de exceder; ajuste por remoção de pagamento; alteração de total da venda com revalidação; fechamento concluído apenas quando aderente.
+
 - Manual exploratório: Operação real de caixa com fracionamento intenso; combinações de forma (cartão+dinheiro+TEF); cenários de contingência e recuperação.
+
 - Onde testar (ambiente, tela, endpoint, processo, integração): Homolog e pré-produção; cadastro financeiro de forma/condição de pagamento; janela de pagamento do PDV; endpoint de fechamento/persistência da venda no módulo `pdv/vendarapida`; integração TEF (se habilitada) e sincronismo.
+
 - Ordem de execução sugerida por risco: 1) E2E de bloqueio financeiro e backend rejection, 2) consistência de totalizadores, 3) bordas de arredondamento e mudança de total, 4) regressões adjacentes (TEF/valor mínimo/troco), 5) observabilidade e auditoria.
 
 ### 8) Matriz "o que testar x impacto esperado"
