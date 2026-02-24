@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "illimitar/tarefas para homologar/ILLI-3760 - PDV Limite acumulado por forma de pagamento percentual ou valor fixo.md",
+                "file": "illimitar/tarefas para homologar/ILLI-3639 - Configuração de Sangria Manual com seleção de contas e ajuste de descrição.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ILLI-3760 - PDV Limite acumulado por forma de pagamento percentual ou valor fixo"
+              "title": "ILLI-3639 - Configuração de Sangria Manual com seleção de contas e ajuste de descrição"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "illimitar/tarefas para homologar/ILLI-3760 - PDV Limite acumulado por forma de pagamento percentual ou valor fixo.md",
+                "file": "illimitar/tarefas para homologar/ILLI-3639 - Configuração de Sangria Manual com seleção de contas e ajuste de descrição.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Links inversos para ILLI-3760 - PDV Limite acumulado por forma de pagamento percentual ou valor fixo"
+              "title": "Links inversos para ILLI-3639 - Configuração de Sangria Manual com seleção de contas e ajuste de descrição"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "illimitar/tarefas para homologar/ILLI-3760 - PDV Limite acumulado por forma de pagamento percentual ou valor fixo.md",
+                "file": "illimitar/tarefas para homologar/ILLI-3639 - Configuração de Sangria Manual com seleção de contas e ajuste de descrição.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Links de saída para ILLI-3760 - PDV Limite acumulado por forma de pagamento percentual ou valor fixo"
+              "title": "Links de saída para ILLI-3639 - Configuração de Sangria Manual com seleção de contas e ajuste de descrição"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "illimitar/tarefas para homologar/ILLI-3760 - PDV Limite acumulado por forma de pagamento percentual ou valor fixo.md",
+                "file": "illimitar/tarefas para homologar/ILLI-3639 - Configuração de Sangria Manual com seleção de contas e ajuste de descrição.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário de ILLI-3760 - PDV Limite acumulado por forma de pagamento percentual ou valor fixo"
+              "title": "Sumário de ILLI-3639 - Configuração de Sangria Manual com seleção de contas e ajuste de descrição"
             }
           },
           {
@@ -196,8 +196,9 @@
   },
   "active": "8eb8305b0885e9e9",
   "lastOpenFiles": [
-    "Bem-vindo.md",
     "illimitar/tarefas para homologar/ILLI-3760 - PDV Limite acumulado por forma de pagamento percentual ou valor fixo.md",
+    "illimitar/tarefas para homologar/ILLI-3639 - Configuração de Sangria Manual com seleção de contas e ajuste de descrição.md",
+    "Bem-vindo.md",
     "illimitar/tarefas para homologar",
     "illimitar",
     "Sem título.base",
