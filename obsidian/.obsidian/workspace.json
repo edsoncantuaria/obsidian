@@ -20,8 +20,23 @@
               "icon": "lucide-file",
               "title": "ILLI-3639 - Configuração de Sangria Manual com seleção de contas e ajuste de descrição"
             }
+          },
+          {
+            "id": "ddf8667db8c9487f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ILLI-3170 - CONFIGURAÇÃO DE FORMA DE PAGAMENTO PARA TODAS AS ENTIDADES.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "ILLI-3170 - CONFIGURAÇÃO DE FORMA DE PAGAMENTO PARA TODAS AS ENTIDADES"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -94,7 +109,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "illimitar/tarefas para homologar/ILLI-3639 - Configuração de Sangria Manual com seleção de contas e ajuste de descrição.md",
+                "file": "ILLI-3170 - CONFIGURAÇÃO DE FORMA DE PAGAMENTO PARA TODAS AS ENTIDADES.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +119,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Links inversos para ILLI-3639 - Configuração de Sangria Manual com seleção de contas e ajuste de descrição"
+              "title": "Links inversos para ILLI-3170 - CONFIGURAÇÃO DE FORMA DE PAGAMENTO PARA TODAS AS ENTIDADES"
             }
           },
           {
@@ -113,12 +128,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "illimitar/tarefas para homologar/ILLI-3639 - Configuração de Sangria Manual com seleção de contas e ajuste de descrição.md",
+                "file": "ILLI-3170 - CONFIGURAÇÃO DE FORMA DE PAGAMENTO PARA TODAS AS ENTIDADES.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Links de saída para ILLI-3639 - Configuração de Sangria Manual com seleção de contas e ajuste de descrição"
+              "title": "Links de saída para ILLI-3170 - CONFIGURAÇÃO DE FORMA DE PAGAMENTO PARA TODAS AS ENTIDADES"
             }
           },
           {
@@ -156,13 +171,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "illimitar/tarefas para homologar/ILLI-3639 - Configuração de Sangria Manual com seleção de contas e ajuste de descrição.md",
+                "file": "ILLI-3170 - CONFIGURAÇÃO DE FORMA DE PAGAMENTO PARA TODAS AS ENTIDADES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário de ILLI-3639 - Configuração de Sangria Manual com seleção de contas e ajuste de descrição"
+              "title": "Sumário de ILLI-3170 - CONFIGURAÇÃO DE FORMA DE PAGAMENTO PARA TODAS AS ENTIDADES"
             }
           },
           {
@@ -194,10 +209,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "8eb8305b0885e9e9",
+  "active": "ddf8667db8c9487f",
   "lastOpenFiles": [
-    "illimitar/tarefas para homologar/ILLI-3760 - PDV Limite acumulado por forma de pagamento percentual ou valor fixo.md",
     "illimitar/tarefas para homologar/ILLI-3639 - Configuração de Sangria Manual com seleção de contas e ajuste de descrição.md",
+    "ILLI-3170 - CONFIGURAÇÃO DE FORMA DE PAGAMENTO PARA TODAS AS ENTIDADES.md",
+    "illimitar/tarefas para homologar/ILLI-3760 - PDV Limite acumulado por forma de pagamento percentual ou valor fixo.md",
     "Bem-vindo.md",
     "illimitar/tarefas para homologar",
     "illimitar",
